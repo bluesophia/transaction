@@ -9,4 +9,4 @@
 [http://vikshv.github.io/transaction/](http://vikshv.github.io/transaction).
 
 ## Info
-[React, Redux, Reac-Router](https://www.gitbook.com/@maxfarseer/).
+[React, Redux, React-Router](https://www.gitbook.com/@maxfarseer/).
