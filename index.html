@@ -26,6 +26,19 @@
 
     <body class="transaction">
         <div id="root"></div>
+
+        <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+        <script>
+            // Initialize Firebase
+            var config = {
+                apiKey: "AIzaSyAnKbIx_zdLzov-GA57DiPz2nys_j3LIgc",
+                authDomain: "transaction-2d847.firebaseapp.com",
+                databaseURL: "https://transaction-2d847.firebaseio.com",
+                storageBucket: "transaction-2d847.appspot.com"
+            };
+            firebase.initializeApp(config);
+        </script>
+
         <script src="/static/transaction.js"></script>
     </body>
     

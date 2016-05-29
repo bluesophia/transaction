@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
-import auth from './auth'
-import page from './page'
+import auth from './authReducer'
+import transaction from './transactionReducer'
 
 export default combineReducers({
     auth,
-    page
+    transaction
 });
