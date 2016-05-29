@@ -1,17 +1,51 @@
 import {
-    GET_BANKS_REQUEST
-    // GET_BANKS_SUCCESS,
-    // GET_BANKS_ERROR
+    ADD_TRANSACTION_REQUEST,
+    ADD_TRANSACTION_SUCCESS,
+    ADD_TRANSACTION_ERROR
 } from '../constants/transactionConstants';
 
-export function getBanks() {
+export function addTransaction({ sum, bankId }) {
     return dispatch => {
         dispatch({
-            type: GET_BANKS_REQUEST
+            type: ADD_TRANSACTION_REQUEST
         });
 
-        window.firebase.database().ref('banks').on('value', () => {
-            debugger;
-        });
+        const firebase = window.firebase;
+        const databaseName = 'transactions';
+        const id = firebase.database().ref(databaseName).push().key;
+        const timestamp = Date.now();
+
+        const updates = {
+            [`${id}`]: {
+                sum,
+                bankId,
+                timestamp
+            }
+        };
+
+        firebase.database().ref(databaseName).update(updates)
+            .then(() => {
+                return firebase.database().ref(`banks/${bankId}`).once('value');
+            })
+            .then(snapshot => {
+                const { name: bankName } = snapshot.val()
+                dispatch({
+                    type: ADD_TRANSACTION_SUCCESS,
+                    paylod: {
+                        id,
+                        sum,
+                        bankName,
+                        timestamp
+                    }
+                });
+            })
+            .catch(error => {
+                dispatch({
+                    type: ADD_TRANSACTION_ERROR,
+                    paylod: {
+                        error
+                    }
+                });
+            });
     };
 }

@@ -7,7 +7,6 @@ import Footer from '../components/Footer';
 import Login from '../components/Login';
 
 import * as authActions from '../actions/authActions';
-import * as transactionActions from '../actions/transactionActions';
 
 class App extends Component {
     render() {
@@ -27,15 +26,13 @@ class App extends Component {
 
 function mapStateToProps(state) {
     return {
-        auth: state.auth,
-        transaction: state.transaction
+        auth: state.auth
     };
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        authActions: bindActionCreators(authActions, dispatch),
-        transactionActions: bindActionCreators(transactionActions, dispatch)
+        authActions: bindActionCreators(authActions, dispatch)
     };
 }
 

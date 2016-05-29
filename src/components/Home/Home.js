@@ -8,7 +8,7 @@ export default class Home extends Component {
                 <div className="col-md-12">
                     <ul className="list-unstyled">
                         <li><Link to="/transaction">Работа с транзакциями</Link></li>
-                        <li><Link to="/transaction">Таблица транзакций</Link></li>
+                        <li><Link to="/table">Таблица транзакций</Link></li>
                     </ul>
                 </div>
             </div>
