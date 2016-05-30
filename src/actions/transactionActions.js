@@ -28,7 +28,7 @@ export function addTransaction({ sum, bankId }) {
                 return firebase.database().ref(`banks/${bankId}`).once('value');
             })
             .then(snapshot => {
-                const { name: bankName } = snapshot.val()
+                const { name: bankName } = snapshot.val();
                 dispatch({
                     type: ADD_TRANSACTION_SUCCESS,
                     paylod: {

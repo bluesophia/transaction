@@ -18,7 +18,7 @@ class TransactionPage extends Component {
 
     render() {
         const { progress: bankProgress, banks } = this.props.bank;
-        const { progress: transactionProgress, transactions } = this.props.transaction;
+        const { progress: transactionProgress, transactions, error } = this.props.transaction;
         const { addTransaction } = this.props.transactionActions;
         return (
             <div>
@@ -34,6 +34,7 @@ class TransactionPage extends Component {
                 ) : (
                     <Transaction 
                         banks={banks}
+                        error={error}
                         transactions={transactions}
                         progress={transactionProgress} 
                         addTransaction={addTransaction} />

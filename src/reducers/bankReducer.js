@@ -10,7 +10,7 @@ const initialState = {
     banks: []
 };
 
-export default function page(state = initialState, action) {
+export default function bank(state = initialState, action) {
     switch (action.type) {
         case GET_BANKS_REQUEST: {
             return { ...state, progress: true };

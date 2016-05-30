@@ -9,7 +9,7 @@ const initialState = {
     transactions: []
 };
 
-export default function page(state = initialState, action) {
+export default function transaction(state = initialState, action) {
     switch (action.type) {
         case ADD_TRANSACTION_REQUEST: {
             const { sum, bankId, bankName } = action;
@@ -27,7 +27,7 @@ export default function page(state = initialState, action) {
             return { ...state, transactions, progress: false };
         }
         case ADD_TRANSACTION_ERROR: {
-            const { error } = action;
+            const { error } = action.paylod;
             return { ...state, error, progress: false };
         }
         default: {

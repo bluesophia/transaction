@@ -13,10 +13,13 @@ class App extends Component {
         const { isLogin, progress } = this.props.auth;
         const { login, logout } = this.props.authActions;
         return (
-            <div>
-                <Navbar isLogin={isLogin} progress={progress} logout={logout} />
-                <div className='container'>
-                    {isLogin ? this.props.children : <Login auth={this.props.auth} login={login} />}
+            <div className="app__body">
+                <div className="app__wrap">
+                    <div className='container'>
+                        <Navbar isLogin={isLogin} progress={progress} logout={logout} />
+                        {isLogin ? this.props.children : <Login auth={this.props.auth} login={login} />}
+                    </div>
+                    <div className="push"></div>
                 </div>
                 <Footer />
             </div>

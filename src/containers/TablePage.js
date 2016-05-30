@@ -2,19 +2,22 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import Table from '../components/Table';
+import TransactionTable from '../components/TransactionTable';
 import Loader from '../components/Loader';
 
-import * as transactionActions from '../actions/transactionActions';
+import * as tableActions from '../actions/tableActions';
 
 class TablePage extends Component {
     constructor(props) {
         super(props);
+        if (!this.props.table.loaded) {
+            this.props.tableActions.getTransactions();
+        }
     }
 
     render() {
-        const transactions = [];
-        const transactionsProgress = true;
+        const { loadProgress, transactions, deleteProgress, deleteKey, error } = this.props.table;
+        const { deleteTransaction } = this.props.tableActions;
         return (
             <div>
                 <div className="row">
@@ -24,10 +27,15 @@ class TablePage extends Component {
                         </div>
                     </div>
                 </div>
-                {transactionsProgress ? (
+                {loadProgress ? (
                     <Loader text={'Загрузка списка транзакций...'} />
                 ) : (
-                    <Table transactions={transactions} />
+                    <TransactionTable 
+                        transactions={transactions} 
+                        deleteTransaction={deleteTransaction} 
+                        deleteProgress={deleteProgress} 
+                        deleteKey={deleteKey}
+                        error={error} />
                 )}
             </div>
         );
@@ -36,13 +44,13 @@ class TablePage extends Component {
 
 function mapStateToProps(state) {
     return {
-        transaction: state.transaction
+        table: state.table
     };
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        transactionActions: bindActionCreators(transactionActions, dispatch)
+        tableActions: bindActionCreators(tableActions, dispatch)
     };
 }
 

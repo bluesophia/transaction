@@ -1,6 +1,6 @@
-﻿import React, { Component } from 'react';
+import React, { Component } from 'react';
 
-export default class Table extends Component {
+export default class TransactionList extends Component {
     render() {
         const tbody = this._getTbody();
         return (
@@ -11,6 +11,7 @@ export default class Table extends Component {
                             <tr>
                                 <th>Сумма</th>
                                 <th>Банк</th>
+                                <th>Дата</th>
                                 <th>Время</th>
                             </tr>
                         </thead>
@@ -34,10 +35,14 @@ export default class Table extends Component {
         const { transactions} = this.props;
         return transactions.map(item => {
             const timestamp = new Date(item.timestamp);
+            const date = timestamp.getDate();
+            const month = timestamp.getMonth();
+            const year = timestamp.getFullYear();
             return (
                 <tr key={item.id}>
                     <td>{item.sum}</td>
                     <td>{item.bankName}</td>
+                    <td>{date}/{month}/{year}</td>
                     <td>{timestamp.toLocaleTimeString()}</td>
                 </tr>
             );

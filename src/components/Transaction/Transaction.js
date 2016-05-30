@@ -1,16 +1,18 @@
 ﻿import React, { Component } from 'react';
-import Table from '../Table';
+import TransactionList from '../TransactionList';
+import ErrorAlert from '../ErrorAlert';
 import './style.scss';
 
 export default class Transaction extends Component {
     render() {
         const options = this._getOptions();
-        const { progress, transactions } = this.props;
+        const { progress, transactions, error } = this.props;
         const disabled = progress ? 'disabled' : null;
         return (
             <div>
+                {error ? <ErrorAlert text={'Не удалось выполнить транзакцию.'} /> : null}
                 <div className="row">
-                    <div className="col-md-12">
+                    <div className="col-md-6">
                         <form className="form-inline" onSubmit={this._submit.bind(this)}>
                             <div className="form-group">
                                 <input type="text" 
@@ -30,7 +32,7 @@ export default class Transaction extends Component {
                     </div>
                 </div>
                 <br/>
-                {transactions.length ? <Table transactions={transactions} /> : null}
+                {transactions.length ? <TransactionList transactions={transactions} /> : null}
             </div>
         );
     }
