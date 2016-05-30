@@ -1,4 +1,4 @@
-# Transaction - react, reac-router, redux example
+# Transaction - react, react-router, redux example
 ## install
 `npm install`
 
