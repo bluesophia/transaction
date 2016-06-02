@@ -4,18 +4,20 @@ import {
     GET_BANKS_ERROR
 } from '../constants/bankConstants';
 
+import databaseService from '../services/databaseService';
+
 export function getBanks() {
     return dispatch => {
         dispatch({
             type: GET_BANKS_REQUEST
         });
 
-        window.firebase.database().ref('banks').once('value')
-            .then(snapshot => {
+        databaseService.getBanks()
+            .then(banks => {
                 dispatch({
                     type: GET_BANKS_SUCCESS,
                     paylod: {
-                        banks: snapshot.val()
+                        banks
                     }
                 });
             })

@@ -4,7 +4,8 @@ import {
     GET_TRANSACTIONS_ERROR,
     DELETE_TRANSACTIONS_REQUEST,
     DELETE_TRANSACTIONS_SUCCESS,
-    DELETE_TRANSACTIONS_ERROR
+    DELETE_TRANSACTIONS_ERROR,
+    ON_TRANSACTIONS_UPDATE
 } from '../constants/tableConstants';
 
 const initialState = {
@@ -38,6 +39,10 @@ export default function table(state = initialState, action) {
         case DELETE_TRANSACTIONS_ERROR: {
             const { error } = action;
             return { ...state, error, deleteKey: null, deleteProgress: false };
+        }
+        case ON_TRANSACTIONS_UPDATE: {
+            const { transactions } = action.paylod;
+            return { ...state, transactions };
         }
         default: {
             return state;

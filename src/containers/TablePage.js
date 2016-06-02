@@ -10,9 +10,7 @@ import * as tableActions from '../actions/tableActions';
 class TablePage extends Component {
     constructor(props) {
         super(props);
-        if (!this.props.table.loaded) {
-            this.props.tableActions.getTransactions();
-        }
+        this._setupTransaction();
     }
 
     render() {
@@ -39,6 +37,15 @@ class TablePage extends Component {
                 )}
             </div>
         );
+    }
+
+    _setupTransaction() {
+        if (!this.props.table.loaded) {
+            this.props.tableActions.getTransactions()
+                .then(() => {
+                    this.props.tableActions.listenToChangeTransactions();
+                });
+        }
     }
 }
 

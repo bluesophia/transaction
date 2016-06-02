@@ -4,31 +4,17 @@ import {
     ADD_TRANSACTION_ERROR
 } from '../constants/transactionConstants';
 
+import databaseService from '../services/databaseService';
+
 export function addTransaction({ sum, bankId }) {
     return dispatch => {
         dispatch({
             type: ADD_TRANSACTION_REQUEST
         });
 
-        const firebase = window.firebase;
-        const databaseName = 'transactions';
-        const id = firebase.database().ref(databaseName).push().key;
-        const timestamp = Date.now();
-
-        const updates = {
-            [`${id}`]: {
-                sum,
-                bankId,
-                timestamp
-            }
-        };
-
-        firebase.database().ref(databaseName).update(updates)
-            .then(() => {
-                return firebase.database().ref(`banks/${bankId}`).once('value');
-            })
-            .then(snapshot => {
-                const { name: bankName } = snapshot.val();
+        databaseService.addTransaction({ sum, bankId })
+            .then(result => {
+                const { id, sum, bankName, timestamp } = result;
                 dispatch({
                     type: ADD_TRANSACTION_SUCCESS,
                     paylod: {

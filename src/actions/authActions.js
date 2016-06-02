@@ -7,6 +7,8 @@ import {
     LOGOUT_ERROR
 } from '../constants/authConstants';
 
+import authService from '../services/authService';
+
 export function login({ email, password }) {
     return dispatch => {
         dispatch({
@@ -17,7 +19,7 @@ export function login({ email, password }) {
             }
         });
 
-        window.firebase.auth().signInWithEmailAndPassword(email, password)
+        authService.login({ email, password })
             .then(() => {
                 dispatch({
                     type: LOGIN_SUCCESS,
@@ -41,7 +43,7 @@ export function logout() {
             type: LOGOUT_REQUEST
         });
 
-        window.firebase.auth().signOut()
+        authService.logout()
             .then(() => {
                 dispatch({
                     type: LOGOUT_SUCCESS
