@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 
 export default class ErrorAlert extends Component {
     render() {
@@ -14,3 +14,7 @@ export default class ErrorAlert extends Component {
         );
     }
 }
+
+ErrorAlert.propTypes = {
+    text: PropTypes.string
+};

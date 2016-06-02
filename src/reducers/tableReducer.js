@@ -25,7 +25,7 @@ export default function table(state = initialState, action) {
             return { ...state, transactions, loadProgress: false, loaded: true };
         }
         case GET_TRANSACTIONS_ERROR: {
-            const { error } = action.paylod;
+            const { error } = action;
             return { ...state, error, loadProgress: false };
         }
         case DELETE_TRANSACTIONS_REQUEST: {
@@ -36,7 +36,7 @@ export default function table(state = initialState, action) {
             return { ...state, deleteKey: null, deleteProgress: false };
         }
         case DELETE_TRANSACTIONS_ERROR: {
-            const { error } = action.paylod;
+            const { error } = action;
             return { ...state, error, deleteKey: null, deleteProgress: false };
         }
         default: {

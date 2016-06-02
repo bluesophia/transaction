@@ -29,9 +29,7 @@ export function login({ email, password }) {
             .catch(error => {
                 dispatch({
                     type: LOGIN_ERROR,
-                    paylod: {
-                        error
-                    }
+                    error
                 });
             });
     };
@@ -52,7 +50,7 @@ export function logout() {
             .catch(error => {
                 dispatch({
                     type: LOGOUT_ERROR,
-                    paylod: error
+                    error
                 });
             });
     };

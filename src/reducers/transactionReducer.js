@@ -27,7 +27,7 @@ export default function transaction(state = initialState, action) {
             return { ...state, transactions, progress: false };
         }
         case ADD_TRANSACTION_ERROR: {
-            const { error } = action.paylod;
+            const { error } = action;
             return { ...state, error, progress: false };
         }
         default: {

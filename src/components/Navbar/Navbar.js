@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import { Link } from 'react-router';
 import './style.scss';
 
@@ -9,7 +9,7 @@ export default class Navbar extends Component {
     }
 
     render() {
-        const { isLogin, progress } = this.props;
+        const { isLogin = false, progress } = this.props;
         return (
             <nav className="navbar navbar-default navbar-fixed-top">
                 <div className="container">
@@ -42,3 +42,8 @@ export default class Navbar extends Component {
         );
     }
 }
+
+Navbar.propTypes = {
+    isLogin: PropTypes.bool,
+    progress: PropTypes.bool
+};

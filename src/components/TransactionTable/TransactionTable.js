@@ -1,5 +1,6 @@
-﻿import React, { Component } from 'react';
+﻿import React, { Component, PropTypes } from 'react';
 import ErrorAlert from '../ErrorAlert';
+import TransactionRow from './components/TransactionRow';
 import './style.scss';
 
 export default class TransactionTable extends Component {
@@ -46,34 +47,11 @@ export default class TransactionTable extends Component {
     }
 
     _getRows() {
-        const { deleteProgress, deleteKey } = this.props;
-        const disabled = deleteProgress ? 'disabled' : null;
+        const { deleteProgress, deleteKey, deleteTransaction } = this.props;
         return this.props.transactions.map(item => {
             const progress = item.id === deleteKey;
-            return this._createRow(item, disabled, progress);
+            return <TransactionRow key={item.id} item={item} disabled={deleteProgress} progress={progress} deleteTransaction={deleteTransaction} />;
         });
-    }
-
-    _createRow(item, disabled, progress) {
-        const timestamp = new Date(item.timestamp);
-        const date = timestamp.getDate();
-        const month = timestamp.getMonth();
-        const year = timestamp.getFullYear();
-        return (
-            <tr key={item.id}>
-                <td>{item.sum}</td>
-                <td>{item.bankName}</td>
-                <td>{date}/{month}/{year}</td>
-                <td>{timestamp.toLocaleTimeString()}</td>
-                <td>
-                    <button type="button" className="btn btn-danger btn-xs" 
-                        disabled={disabled}
-                        onClick={this._deleteTransaction.bind(this, item.id)} >
-                        {progress ? <i className="fa fa-lg fa-spinner fa-spin"></i> : null} Удалить
-                    </button>
-                </td>
-            </tr>
-        );
     }
 
     _getEmptyRow() {
@@ -85,9 +63,12 @@ export default class TransactionTable extends Component {
             </tr>
         );
     }
-
-    _deleteTransaction(key, e) {
-        e.preventDefault();
-        this.props.deleteTransaction(key);
-    }
 }
+
+TransactionTable.propTypes = {
+    error: PropTypes.bool,
+    transactions: PropTypes.array,
+    deleteProgress: PropTypes.bool,
+    deleteKey: PropTypes.string,
+    deleteTransaction: PropTypes.func
+};

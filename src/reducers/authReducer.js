@@ -37,7 +37,8 @@ export default function auth(state = initialState, action) {
             return Object.assign({ ...state, isLogin: false, progress: false }, defaultUser);
         }
         case LOGOUT_ERROR: {
-            return { ...state, progress: false };
+            const { error } = action;
+            return { ...state, error, progress: false };
         }
         default: {
             return state;

@@ -22,9 +22,7 @@ export function getBanks() {
             .catch(error => {
                 dispatch({
                     type: GET_BANKS_ERROR,
-                    paylod: {
-                        error
-                    }
+                    error
                 });
             });
     };

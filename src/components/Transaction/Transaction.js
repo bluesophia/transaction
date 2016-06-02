@@ -1,9 +1,17 @@
-﻿import React, { Component } from 'react';
+﻿import React, { Component, PropTypes } from 'react';
 import TransactionList from '../TransactionList';
 import ErrorAlert from '../ErrorAlert';
 import './style.scss';
 
 export default class Transaction extends Component {
+    constructor(props) {
+        super(props);
+
+        this._onSubmit = e => {
+            this._submit(e);
+        };
+    }
+
     render() {
         const options = this._getOptions();
         const { progress, transactions, error } = this.props;
@@ -13,7 +21,7 @@ export default class Transaction extends Component {
                 {error ? <ErrorAlert text={'Не удалось выполнить транзакцию.'} /> : null}
                 <div className="row">
                     <div className="col-md-6">
-                        <form className="form-inline" onSubmit={this._submit.bind(this)}>
+                        <form className="form-inline" onSubmit={this._onSubmit}>
                             <div className="form-group">
                                 <input type="text" 
                                     disabled={disabled}
@@ -51,3 +59,11 @@ export default class Transaction extends Component {
         });
     }
 }
+
+Transaction.propTypes = {
+    progress: PropTypes.bool,
+    transactions: PropTypes.array,
+    error: PropTypes.bool,
+    banks: PropTypes.array,
+    addTransaction: PropTypes.func
+};

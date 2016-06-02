@@ -1,4 +1,5 @@
 import { Promise } from 'es6-promise-polyfill';
+import _ from 'underscore';
 
 import {
     GET_TRANSACTIONS_REQUEST,
@@ -46,9 +47,7 @@ export function deleteTransaction(key) {
             .catch(error => {
                 dispatch({
                     type: DELETE_TRANSACTIONS_ERROR,
-                    paylod: {
-                        error
-                    }
+                    error
                 });
             });
     }
@@ -61,7 +60,7 @@ function _resolveBankName(transactions) {
     for (let key in transactions) {
         const item = transactions[key];
         result.push({ ...item, id: key });
-        requests.push(_getBankName(item));
+        requests.push(_getBankName(item.bankId));
     }
 
     return Promise.all(requests)
@@ -76,7 +75,6 @@ function _resolveBankName(transactions) {
         });
 }
 
-function _getBankName(transaction) {
-    const { bankId } = transaction;
+const _getBankName = _.memoize(function(bankId) {
     return window.firebase.database().ref(`banks/${bankId}`).once('value');
-}
+});

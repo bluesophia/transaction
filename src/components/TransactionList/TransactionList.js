@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 
 export default class TransactionList extends Component {
     render() {
@@ -35,17 +35,27 @@ export default class TransactionList extends Component {
         const { transactions} = this.props;
         return transactions.map(item => {
             const timestamp = new Date(item.timestamp);
-            const date = timestamp.getDate();
-            const month = timestamp.getMonth();
-            const year = timestamp.getFullYear();
+            const { date, month, year } = this._getDate(timestamp);
             return (
                 <tr key={item.id}>
                     <td>{item.sum}</td>
                     <td>{item.bankName}</td>
-                    <td>{date}/{month}/{year}</td>
+                    <td>{date}/{month + 1}/{year}</td>
                     <td>{timestamp.toLocaleTimeString()}</td>
                 </tr>
             );
         });
     }
+
+    _getDate(timestamp) {
+        return {
+            date: timestamp.getDate(),
+            month: timestamp.getMonth(),
+            year: timestamp.getFullYear()
+        };
+    }
 }
+
+TransactionList.propTypes = {
+    transactions: PropTypes.array
+};

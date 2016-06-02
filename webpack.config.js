@@ -12,7 +12,7 @@ module.exports = {
     output: {
         path: path.join(__dirname, 'dist'),
         filename: 'transaction.js',
-        publicPath: '/static/'
+        publicPath: '/dist/'
     },
     plugins: [
         new webpack.optimize.OccurenceOrderPlugin(),

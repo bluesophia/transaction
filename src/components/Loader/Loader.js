@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import './style.scss';
 
 export default class Table extends Component {
     render() {
-        const { text = 'Загрузка...' } = this.props;
+        const { text } = this.props;
         return (
             <div className="row">
                 <div className="col-md-12">
@@ -19,4 +19,12 @@ export default class Table extends Component {
             </div>
         );
     }
+}
+
+Table.propTypes = {
+    text: PropTypes.string
+};
+
+Table.defaultProps = {
+    text: 'Загрузка...'
 }

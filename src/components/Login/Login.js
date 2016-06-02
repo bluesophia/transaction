@@ -1,6 +1,14 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 
 export default class Login extends Component {
+    constructor(props) {
+        super(props);
+        
+        this._onSubmit = e => {
+            this._submit(e);
+        };
+    }
+
     _submit(e) {
         e.preventDefault();
         const { email, password } = e.target;
@@ -25,7 +33,7 @@ export default class Login extends Component {
                 <div className="row">
                     <div className="col-md-offset-3 col-md-6">
                         <div className="well">
-                            <form name="auth" className="form-horizontal from--auth" onSubmit={this._submit.bind(this)}>
+                            <form name="auth" className="form-horizontal from--auth" onSubmit={this._onSubmit}>
                                 <fieldset>
                                     <div className="form-group">
                                         <label for="inputEmail" className="col-md-2 control-label">Email</label>
@@ -61,3 +69,9 @@ export default class Login extends Component {
         );
     }
 }
+
+Login.propTypes = {
+    email: PropTypes.string,
+    password: PropTypes.string,
+    progress: PropTypes.bool
+};

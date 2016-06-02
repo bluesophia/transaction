@@ -42,9 +42,7 @@ export function addTransaction({ sum, bankId }) {
             .catch(error => {
                 dispatch({
                     type: ADD_TRANSACTION_ERROR,
-                    paylod: {
-                        error
-                    }
+                    error
                 });
             });
     };
